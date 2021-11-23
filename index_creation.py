@@ -42,8 +42,7 @@ def createIndex():
                                 "ignore_above": 256
                             }
                     },
-                    "analyzer": "sinhala-analyzer",
-                    "search_analyzer": "standard"
+                    "analyzer": "sinhala-analyzer",         
                 },
                 "dob": {
                     "type": "text",
@@ -54,7 +53,6 @@ def createIndex():
                             }
                     },
                     "analyzer": "sinhala-analyzer",
-                    "search_analyzer": "standard"
                 },
                 "birthplace": {
                     "type": "text",
@@ -65,7 +63,6 @@ def createIndex():
                             }
                     },
                     "analyzer": "sinhala-analyzer",
-                    "search_analyzer": "standard"
                 },
                 "education": {
                     "type": "text",
@@ -76,7 +73,6 @@ def createIndex():
                             }
                     },
                     "analyzer": "sinhala-analyzer",
-                    "search_analyzer": "standard"
                 },
                 "booklist": {
                     "type": "text",
@@ -87,7 +83,6 @@ def createIndex():
                             }
                     },
                     "analyzer": "sinhala-analyzer",
-                    "search_analyzer": "standard"
                 },
                 "about_author": {
                     "type": "text",
@@ -98,7 +93,6 @@ def createIndex():
                             }
                     },
                     "analyzer": "sinhala-analyzer",
-                    "search_analyzer": "standard"
                 },
                 "language": {
                     "type": "text",
@@ -109,7 +103,6 @@ def createIndex():
                             }
                     },
                     "analyzer": "sinhala-analyzer",
-                    "search_analyzer": "standard"
 
                 },
 
@@ -123,7 +116,6 @@ def createIndex():
                             }
                     },
                     "analyzer": "sinhala-analyzer",
-                    "search_analyzer": "standard"
 
                 }
 
@@ -140,13 +132,12 @@ def createIndex():
 def read_authors():
     THIS_FOLDER = os.path.dirname(os.path.abspath(__file__))
     my_file1 = os.path.join(THIS_FOLDER, 'data')
-    my_file = os.path.join(my_file1, 'Authours.json')
+    my_file = os.path.join(my_file1, 'Authors.json')
 
-    with open(my_file, 'r', encoding='utf8') as tra_file:
+    with open(my_file, 'r', encoding='utf-8-sig') as tra_file:
         authors = json.loads(tra_file.read())
         results_list = [a for num, a in enumerate(authors) if a not in authors[num + 1:]]
         return results_list
-
 
 def clean_function(song_lyrics):
     if (song_lyrics):
@@ -179,7 +170,7 @@ def data_generation(author_array):
 
         name = author["name"]
         # dob = clean_function(author["song_lyrics"])
-        dob = author["dob"]
+        dob = author["date_of_birth"]
         birthplace = author["birthplace"]
 
         education = author["education"]

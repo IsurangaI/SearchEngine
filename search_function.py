@@ -37,12 +37,12 @@ def search(search_query):
                 search_fields.append(field_list[i])
                 if(field_list[i]=="name"):
                     search_fields.append(field_list[i+1])
-                # if(field_list[i]=="author_name_english"):
-                #     search_fields.append(field_list[i-1])
-                # if(field_list[i]=="birthplace"):
-                #     search_fields.append(field_list[i-2])
-                # if(field_list[i]=="birth_place_english"):
-                #     search_fields.append(field_list[i-1])
+                if(field_list[i]=="author_name_english"):
+                    search_fields.append(field_list[i-1])
+                if(field_list[i]=="birthplace"):
+                    search_fields.append(field_list[i+1])
+                if(field_list[i]=="birth_place_english"):
+                    search_fields.append(field_list[i-1])
                 
                 processed_tokens.remove(word)
 
@@ -51,13 +51,13 @@ def search(search_query):
     else:
         processed_query = " ".join(processed_tokens)
 
-    ###Boosting
-    # for field in all_fields:
-    #     if (field in search_fields):
-    #         final_fields.append(field+"^5")
-    #     else:
-    #         final_fields.append(field)
-    final_fields = search_fields
+    ##Boosting
+    for field in all_fields:
+        if (field in search_fields):
+            final_fields.append(field+"^5")
+        else:
+            final_fields.append(field)
+    # final_fields = search_fields
     print("FINAL FEELDS : ",final_fields)
 
 
