@@ -1,0 +1,94 @@
+<script>
+	function MyFunction(aggregate){
+		keyword = aggregate.name;
+		console.log("keyword: "+keyword);
+		songs_array = document.getElementsByClassName('search-result row');
+		songs_array = Array.from(songs_array);
+		matching_songs = songs_array.filter(keyword_filter,keyword);
+		len_matching = matching_songs.length;
+		len_original = songs_array.length;
+		section = document.getElementById('song_section');
+		section.innerHTML = matching_songs.map(e => e.outerHTML).join()
+		console.log(section);
+		header = document.getElementById('results');
+		header.innerHTML = `<h2 class="lead" id="results"><strong class="text-danger">${len_matching}</strong> results out of ${len_original} matches the criteria</h2>`;
+
+		var tags_ul = document.getElementById("tags");
+		var tags_li = document.createElement("li");
+		tags_li.setAttribute("style","display:inline-block; padding:15px; margin:10px; border: 2px solid blue; border-radius: 5px;");
+		tags_li.appendChild(document.createTextNode(keyword));
+		tags_ul.appendChild(tags_li);
+	}
+
+	function keyword_filter(element){
+		keyword = this;
+		content = element.innerText;
+		return content.includes(keyword)
+	}
+
+</script>
+
+<div class="container">
+    <head>
+        <title>Song Search</title>
+    </head>
+    <hgroup class="mb20">
+        <h1 style="background-color:rgb(255, 253, 136);"><center>Author Search Engine</center></h1>
+        <h3 class="lead"><center>Enter the search query</center></strong></h3>
+    </hgroup>
+	<form action="http://127.0.0.1:5000/" method="post" align="center">
+		<input type="text" class="searchTerm" name="searchTerm"  placeholder="Search for your preferance">
+    	<input type="submit" value="Submit">
+	</form>
+
+	{% if hits %}
+        <head>
+            <title>Author Search</title>
+        </head>
+    <hgroup class="mb20">
+		<h2><i><u>Search Results</u></i></h2>
+		<h3 class="lead" id="results"><strong class="text-danger">{{ num_results }}</strong> results founded for : <strong class="text-danger">{{  query  }}</strong></h3>
+	</hgroup>
+
+
+    <section id='author_section' class="col-md-8">
+		{% for hit in hits %}
+		<article class="search-result row">
+			<div class="col-md-12">
+				<h3 style="color:darkblue;">{{ hit._source.title }}</h3>
+				<ul class="meta-search">
+					<li><i class="glyphicon glyphicon-tags"></i> <span>Author Name - {{ hit._source.name }}</span></li>
+                    <li><i class="glyphicon glyphicon-tags"></i> <span>Date of Birth - {{ hit._source.dob }}</span></li>
+					<li><i class="glyphicon glyphicon-tags"></i> <span>Birth Place - {{ hit._source.birthplace }}</span></li>
+                    <li><i class="glyphicon glyphicon-tags"></i> <span>Education - {{ hit._source.education }} </span></li>
+                    <li><i class="glyphicon glyphicon-tags"></i> <span>List of Books - {{ hit._source.booklist }} </span></li>
+					<li><i class="glyphicon glyphicon-tags"></i> <span>Language- {{ hit._source.language}} </span></li>
+					<li><i class="glyphicon glyphicon-tags"></i> <span>Categoty - {{ hit._source.category }} </span></li>
+                    <li><i class="glyphicon glyphicon-tags"></i> <span>About Author -  </span></li>
+				</ul>
+				<p style="white-space: pre-line">{{ hit._source.about_author}}</p>
+			</div>
+			<div class="col-md-6">
+
+			</div>
+			<span class="clearfix borda"></span>
+		</article>
+		{% endfor %}
+	</section>
+
+
+	{% else %}
+		{% if init %}
+            <head>
+            <title>Author Search</title>
+            </head>
+
+
+		{% else %}
+		<hgroup class="mb20">
+			<h2><i><u>Search Results</u></i></h2>
+			<h3 class="lead"><strong class="text-danger">No</strong> results found for : <strong class="text-danger">{{  query  }}</strong></h3>
+		</hgroup>
+		{% endif %}
+	{% endif %}
+</div>
