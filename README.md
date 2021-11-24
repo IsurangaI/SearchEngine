@@ -7,6 +7,7 @@ wikipedia.com, peoplepill.com, ranker.com.
 ● Indexing
 ‘ICU tokenizer’standard tokenizer was used for indexing since it supports better for asian
 languages.Elastic search ‘edge_ngram’ filter was used to generate n-grams
+
 ● Querying Techniques
 Searched query was tokenized using the “Sinling tokenizer”.
 Keywords are extracted from the search query.
