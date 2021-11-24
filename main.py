@@ -8,7 +8,7 @@ def search_box():
         print ("POST")
         query = request.form['searchTerm']
         search_result = search(query)
-        print (search_result)
+        # print (search_result)
         hits_result = search_result['hits']['hits']
         aggregations = search_result['aggregations']
         results_count = len(hits_result)

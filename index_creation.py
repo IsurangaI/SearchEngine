@@ -42,7 +42,8 @@ def createIndex():
                                 "ignore_above": 256
                             }
                     },
-                    "analyzer": "sinhala-analyzer",         
+                    "analyzer": "sinhala-analyzer",  
+                    "search_analyzer": "standard",        
                 },
                 "author_name_english": {
                     "type": "text",
@@ -62,6 +63,8 @@ def createIndex():
                             }
                     },
                     "analyzer": "sinhala-analyzer",
+                    "search_analyzer": "standard",
+
                 },
                 "birth_place": {
                     "type": "text",
@@ -71,7 +74,8 @@ def createIndex():
                                 "ignore_above": 256
                             }
                     },
-                    "analyzer": "sinhala-analyzer",                   
+                    "analyzer": "sinhala-analyzer",    
+                    "search_analyzer": "standard",               
                 },
                 "birth_place_english": {
                     "type": "text",
@@ -91,6 +95,7 @@ def createIndex():
                             }
                     },
                     "analyzer": "sinhala-analyzer",
+                    "search_analyzer": "standard",
                 },
                 "book_list": {
                     "type": "text",
@@ -101,6 +106,7 @@ def createIndex():
                             }
                     },
                     "analyzer": "sinhala-analyzer",
+                    "search_analyzer": "standard",
                 },
                 "about_author": {
                     "type": "text",
@@ -111,6 +117,7 @@ def createIndex():
                             }
                     },
                     "analyzer": "sinhala-analyzer",
+                    "search_analyzer": "standard",
                 },
                 "language": {
                     "type": "text",
@@ -121,6 +128,7 @@ def createIndex():
                             }
                     },
                     "analyzer": "sinhala-analyzer",
+                    "search_analyzer": "standard",
 
                 },
 
@@ -134,6 +142,7 @@ def createIndex():
                             }
                     },
                     "analyzer": "sinhala-analyzer",
+                    "search_analyzer": "standard",
 
                 }
 
