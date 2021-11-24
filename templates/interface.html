@@ -2,12 +2,12 @@
 	function MyFunction(aggregate){
 		keyword = aggregate.name;
 		console.log("keyword: "+keyword);
-		songs_array = document.getElementsByClassName('search-result row');
-		songs_array = Array.from(songs_array);
-		matching_songs = songs_array.filter(keyword_filter,keyword);
-		len_matching = matching_songs.length;
-		len_original = songs_array.length;
-		section = document.getElementById('song_section');
+		author_array = document.getElementsByClassName('search-result row');
+		author_array = Array.from(author_array);
+		matching_authors = author_array.filter(keyword_filter,keyword);
+		len_matching = matching_authors.length;
+		len_original = author_array.length;
+		section = document.getElementById('author_section');
 		section.innerHTML = matching_songs.map(e => e.outerHTML).join()
 		console.log(section);
 		header = document.getElementById('results');
@@ -57,12 +57,13 @@
 			<div class="col-md-12">
 				<h3 style="color:darkblue;">{{ hit._source.title }}</h3>
 				<ul class="meta-search">
-					<li><i class="glyphicon glyphicon-tags"></i> <span>Author Name - {{ hit._source.name }}</span></li>
-                    <li><i class="glyphicon glyphicon-tags"></i> <span>Date of Birth - {{ hit._source.dob }}</span></li>
-					<li><i class="glyphicon glyphicon-tags"></i> <span>Birth Place - {{ hit._source.birthplace }}</span></li>
-                    <li><i class="glyphicon glyphicon-tags"></i> <span>Education - {{ hit._source.education }} </span></li>
-                    <li><i class="glyphicon glyphicon-tags"></i> <span>List of Books - {{ hit._source.booklist }} </span></li>
-					<li><i class="glyphicon glyphicon-tags"></i> <span>Language- {{ hit._source.language}} </span></li>
+					<li><i class="glyphicon glyphicon-tags"></i> <span>Author Name - {{ hit._source.author_name }}</span></li>
+					<li><i class="glyphicon glyphicon-tags"></i> <span>Author Name English- {{ hit._source.author_name_english }}</span></li>
+                    <li><i class="glyphicon glyphicon-tags"></i> <span>Date of Birth - {{ hit._source.date_of_birth }}</span></li>
+					<li><i class="glyphicon glyphicon-tags"></i> <span>Birth Place - {{ hit._source.birth_place }}</span></li>
+                    <li><i class="glyphicon glyphicon-tags"></i> <span>Education - {{ hit._source.school }} </span></li>
+                    <li><i class="glyphicon glyphicon-tags"></i> <span>List of Books - {{ hit._source.book_list }} </span></li>
+					<li><i class="glyphicon glyphicon-tags"></i> <span>Language- {{ hit._source.languages}} </span></li>
 					<li><i class="glyphicon glyphicon-tags"></i> <span>Categoty - {{ hit._source.category }} </span></li>
                     <li><i class="glyphicon glyphicon-tags"></i> <span>About Author -  </span></li>
 				</ul>

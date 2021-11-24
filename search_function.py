@@ -24,8 +24,8 @@ def search(search_query):
     processed_tokens = search_query.split()
     search_fields = []
     sort_num = 0
-    field_list = ["name","author_name_english", "birthplace", "birth_place_english"]
-    all_fields = ["name","birthplace","dob", "birthplace", "education", "booklist", "about_author", "language", "category","author_name_english","birth_place_english"]
+    field_list = ["author_name","author_name_english", "birth_place", "birth_place_english"]
+    all_fields = ["author_name","birthplace","date_of_birth", "birth_place", "school", "booklist", "about_author", "language", "category","author_name_english","birth_place_english"]
     final_fields = []
 
     for word in tokens:
@@ -35,11 +35,11 @@ def search(search_query):
             if word in synonym_list[i]:
                 print('Adding field', field_list[i], 'for ', word, 'search field list')
                 search_fields.append(field_list[i])
-                if(field_list[i]=="name"):
+                if(field_list[i]=="author_name"):
                     search_fields.append(field_list[i+1])
                 if(field_list[i]=="author_name_english"):
                     search_fields.append(field_list[i-1])
-                if(field_list[i]=="birthplace"):
+                if(field_list[i]=="birth_place"):
                     search_fields.append(field_list[i+1])
                 if(field_list[i]=="birth_place_english"):
                     search_fields.append(field_list[i-1])
@@ -52,13 +52,13 @@ def search(search_query):
         processed_query = " ".join(processed_tokens)
 
     ##Boosting
-    for field in all_fields:
-        if (field in search_fields):
-            final_fields.append(field+"^5")
-        else:
-            final_fields.append(field)
-    # final_fields = search_fields
-    print("FINAL FEELDS : ",final_fields)
+    # for field in all_fields:
+    #     if (field in search_fields):
+    #         final_fields.append(field+"^5")
+    #     else:
+    #         final_fields.append(field)
+    final_fields = search_fields
+    # print("FINAL FEELDS : ",final_fields)
 
 
     if(len(search_fields)==0):

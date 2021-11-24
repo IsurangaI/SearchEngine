@@ -34,7 +34,7 @@ def createIndex():
         },
         "mappings": {
             "properties": {
-                "Name": {
+                "author_name": {
                     "type": "text",
                     "fields": {
                             "keyword": {
@@ -44,7 +44,16 @@ def createIndex():
                     },
                     "analyzer": "sinhala-analyzer",         
                 },
-                "dob": {
+                "author_name_english": {
+                    "type": "text",
+                    "fields": {
+                            "keyword": {
+                                "type": "keyword",
+                                "ignore_above": 256
+                            }
+                    },     
+                },
+                "date_of_birth": {
                     "type": "text",
                     "fields": {
                             "keyword": {
@@ -54,7 +63,26 @@ def createIndex():
                     },
                     "analyzer": "sinhala-analyzer",
                 },
-                "birthplace": {
+                "birth_place": {
+                    "type": "text",
+                    "fields": {
+                            "keyword": {
+                                "type": "keyword",
+                                "ignore_above": 256
+                            }
+                    },
+                    "analyzer": "sinhala-analyzer",                   
+                },
+                "birth_place_english": {
+                    "type": "text",
+                    "fields": {
+                            "keyword": {
+                                "type": "keyword",
+                                "ignore_above": 256
+                            }
+                    },                 
+                },
+                "school": {
                     "type": "text",
                     "fields": {
                             "keyword": {
@@ -64,17 +92,7 @@ def createIndex():
                     },
                     "analyzer": "sinhala-analyzer",
                 },
-                "education": {
-                    "type": "text",
-                    "fields": {
-                            "keyword": {
-                                "type": "keyword",
-                                "ignore_above": 256
-                            }
-                    },
-                    "analyzer": "sinhala-analyzer",
-                },
-                "booklist": {
+                "book_list": {
                     "type": "text",
                     "fields": {
                             "keyword": {
@@ -134,7 +152,7 @@ def read_authors():
     my_file1 = os.path.join(THIS_FOLDER, 'data')
     my_file = os.path.join(my_file1, 'formatted_authors.json')
 
-    with open(my_file, 'r', encoding='utf-8-sig') as tra_file:
+    with open(my_file,'r', encoding='utf-8-sig') as tra_file:
         authors = json.loads(tra_file.read())
         results_list = [a for num, a in enumerate(authors) if a not in authors[num + 1:]]
         return results_list
@@ -142,13 +160,14 @@ def read_authors():
 def data_generation(author_array):
     for author in author_array:
 
-        name = author["author_name"]
+        author_name = author["author_name"]
         
         author_name_english = author["author_name_english"]
-        dob = author["date_of_birth"]
-        birthplace = author["birth_place"]
+        date_of_birth = author["date_of_birth"]
+        birth_place = author["birth_place"]
+        birth_place_english = author["birth_place_english"]
 
-        education = author["school"]
+        school = author["school"]
         book_list = author["book_list"]
         about = author["about_author"]
         languages = author["language"]
@@ -158,10 +177,12 @@ def data_generation(author_array):
         yield {
             "_index": INDEX,
             "_source": {
-                "name": name,
-                "dob": dob,
-                'birthplace': birthplace,
-                "education": education,
+                "author_name": author_name,
+                "date_of_birth": date_of_birth,
+                'birth_place': birth_place,
+                'birth_place_english': birth_place_english,
+
+                "school": school,
                 "booklist": book_list,
                 "about_author": about,
                 "language": languages,

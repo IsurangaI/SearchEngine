@@ -3,7 +3,7 @@ import json
 # best_fields
 
 
-def multi_match_agg_best(query, fields=['name', 'about_author']):
+def multi_match_agg_best(query, fields=['author_name', 'about_author']):
     print("QUERY FIELDS")
     print(fields)
     q = {
@@ -20,19 +20,19 @@ def multi_match_agg_best(query, fields=['name', 'about_author']):
         "aggs": {
             "Genre Filter": {
                 "terms": {
-                    "field": "dob.keyword",
+                    "field": "date_of_birth.keyword",
                     "size": 10
                 }
             },
             "Music Filter": {
                 "terms": {
-                    "field": "birthplace.keyword",
+                    "field": "birth_place.keyword",
                     "size": 10
                 }
             },
             "Artist Filter": {
                 "terms": {
-                    "field": "education.keyword",
+                    "field": "school.keyword",
                     "size": 10
                 }
             },
@@ -58,7 +58,7 @@ def multi_match_agg_best(query, fields=['name', 'about_author']):
 # cross_fields
 
 
-def multi_match_agg_cross(query, fields=['name', 'about_author']):
+def multi_match_agg_cross(query, fields):
     print("QUERY FIELDS")
     print(fields)
     q = {
@@ -72,37 +72,32 @@ def multi_match_agg_cross(query, fields=['name', 'about_author']):
                 "type": "cross_fields"
             }
         },
-        "aggs": {
-            "Genre Filter": {
-                "terms": {
-                    "field": "dob.keyword",
-                    "size": 10
-                }
-            },
-            "Music Filter": {
-                "terms": {
-                    "field": "birthplace.keyword",
-                    "size": 10
-                }
-            },
-            "Artist Filter": {
-                "terms": {
-                    "field": "education.keyword",
-                    "size": 10
-                }
-            },
-            "Lyrics Filter": {
-                "terms": {
-                    "field": "booklist.keyword",
-                    "size": 10
-                }
-            },
-            "Language Filter": {
-                "terms": {
-                    "field": "language.keyword",
-                    "size": 10
-                }
-            }}
+		"aggs": {
+			"BirthPlace Filter": {
+				"terms": {
+					"field": "birth_place.keyword",
+					"size": 10
+				}
+			},
+			"Book Filter": {
+				"terms": {
+					"field": "book_list.keyword",
+					"size": 10
+				}
+			},
+			"Author Filter": {
+				"terms": {
+					"field": "author_name.keyword",
+					"size": 10
+				}
+			},
+			"Category Filter": {
+				"terms": {
+					"field": "category.keyword",
+					"size": 10
+				}
+			}
+		}
     }
 
     q = json.dumps(q)
@@ -110,7 +105,7 @@ def multi_match_agg_cross(query, fields=['name', 'about_author']):
 
 
 # phrase_fields
-def multi_match_agg_phrase(query, fields=['name', 'about_author']):
+def multi_match_agg_phrase(query, fields=['author_name']):
     print("QUERY FIELDS")
     print(fields)
     q = {
@@ -124,37 +119,32 @@ def multi_match_agg_phrase(query, fields=['name', 'about_author']):
                 "type": "phrase_prefix"
             }
         },
-        "aggs": {
-            "Genre Filter": {
-                "terms": {
-                    "field": "dob.keyword",
-                    "size": 10
-                }
-            },
-            "Music Filter": {
-                "terms": {
-                    "field": "birthplace.keyword",
-                    "size": 10
-                }
-            },
-            "Artist Filter": {
-                "terms": {
-                    "field": "education.keyword",
-                    "size": 10
-                }
-            },
-            "Lyrics Filter": {
-                "terms": {
-                    "field": "booklist.keyword",
-                    "size": 10
-                }
-            },
-            "Language Filter": {
-                "terms": {
-                    "field": "language.keyword",
-                    "size": 10
-                }
-            }}
+		"aggs": {
+			"BirthPlace Filter": {
+				"terms": {
+					"field": "birth_place.keyword",
+					"size": 10
+				}
+			},
+			"Book Filter": {
+				"terms": {
+					"field": "book_list.keyword",
+					"size": 10
+				}
+			},
+			"Author Filter": {
+				"terms": {
+					"field": "author_name.keyword",
+					"size": 10
+				}
+			},
+			"Category Filter": {
+				"terms": {
+					"field": "category.keyword",
+					"size": 10
+				}
+			}
+		}
     }
 
     q = json.dumps(q)
