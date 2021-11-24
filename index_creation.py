@@ -132,49 +132,24 @@ def createIndex():
 def read_authors():
     THIS_FOLDER = os.path.dirname(os.path.abspath(__file__))
     my_file1 = os.path.join(THIS_FOLDER, 'data')
-    my_file = os.path.join(my_file1, 'Authors.json')
+    my_file = os.path.join(my_file1, 'formatted_authors.json')
 
     with open(my_file, 'r', encoding='utf-8-sig') as tra_file:
         authors = json.loads(tra_file.read())
         results_list = [a for num, a in enumerate(authors) if a not in authors[num + 1:]]
         return results_list
 
-def clean_function(song_lyrics):
-    if (song_lyrics):
-        processed_list = []
-        song_lines = song_lyrics.split('\n')
-
-        for place,s_line in enumerate(song_lines):
-            process_line = re.sub('\s+',' ',s_line)
-            punc_process_line = re.sub('[.!?\\-]', '', process_line)
-            processed_list.append(punc_process_line)
-
-        sen_count = len(processed_list)
-        final_processed_list = []
-
-        for place,s_line in enumerate(processed_list):
-            if (s_line=='' or s_line==' '):
-                if (place!= sen_count-1 and (processed_list[place+1]==' ' or processed_list[place+1]=='')) :
-                    pass
-                else:
-                    final_processed_list.append(s_line)
-            else:
-                final_processed_list.append(s_line)
-        final_song_lyrics = '\n'.join(final_processed_list)
-        return final_song_lyrics
-    else:
-        return None
-
 def data_generation(author_array):
     for author in author_array:
 
-        name = author["name"]
-        # dob = clean_function(author["song_lyrics"])
+        name = author["author_name"]
+        
+        author_name_english = author["author_name_english"]
         dob = author["date_of_birth"]
-        birthplace = author["birthplace"]
+        birthplace = author["birth_place"]
 
-        education = author["education"]
-        book_list = author["booklist"]
+        education = author["school"]
+        book_list = author["book_list"]
         about = author["about_author"]
         languages = author["language"]
 

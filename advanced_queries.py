@@ -1,6 +1,6 @@
 import json
 
-# best_filds
+# best_fields
 
 
 def multi_match_agg_best(query, fields=['name', 'about_author']):
@@ -55,7 +55,7 @@ def multi_match_agg_best(query, fields=['name', 'about_author']):
     return q
 
 
-# cross_filds
+# cross_fields
 
 
 def multi_match_agg_cross(query, fields=['name', 'about_author']):
@@ -109,7 +109,7 @@ def multi_match_agg_cross(query, fields=['name', 'about_author']):
     return q
 
 
-# phrase_filds
+# phrase_fields
 def multi_match_agg_phrase(query, fields=['name', 'about_author']):
     print("QUERY FIELDS")
     print(fields)
